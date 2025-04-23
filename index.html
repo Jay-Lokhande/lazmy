@@ -70,7 +70,9 @@
       animation: slideIn 2s ease-out forwards;
       z-index: 100;
     }
-
+    @keyframes slideIn {
+      to { left: 50%; transform: translateX(-50%); }
+    }
     .construction {
       font-size: 2.5rem;
       font-weight: 700;
