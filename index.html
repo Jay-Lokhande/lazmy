@@ -174,7 +174,7 @@
     resize();
 
     let points = [];
-    const graphDuration = 8000;
+    let graphDuration = window.innerWidth <= 768 ? 5000 : 8000;
     let graphIndex = 0;
     const graphConfigs = [
       {
