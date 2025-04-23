@@ -2,14 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover" />
   <title>lazmy.art – Under Construction</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
-    /* Brand variables for consistent look & feel */
     :root {
       --bg-color: #111;
       --text-color: #eee;
@@ -33,7 +30,6 @@
       position: relative;
     }
 
-    /* Progress bar at top */
     #progress-container {
       position: fixed; top: 0; left: 0;
       width: 100%; height: 6px;
@@ -47,7 +43,6 @@
       transition: width 0.1s ease-out;
     }
 
-    /* Fullscreen background canvas */
     canvas#bg-graph {
       position: fixed; top: 0; left: 0;
       width: 100%; height: 100%;
@@ -57,10 +52,10 @@
     .container {
       position: relative;
       max-width: 600px;
-      margin: 8rem auto 0; /* Increased top margin */
+      margin: 8rem auto 0;
+      padding: 0 1rem;
     }
 
-    /* Modified logo positioning */
     .logo {
       font-size: 3rem;
       font-weight: 700;
@@ -72,15 +67,17 @@
       animation: slideIn 2s ease-out forwards;
       z-index: 100;
     }
+
     @keyframes slideIn {
       to { left: 50%; transform: translateX(-50%); }
     }
+
     .construction {
       font-size: 2.5rem;
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      margin-top: 15vh; /* Vertical spacing from logo */
+      margin-top: 15vh;
       color: var(--accent-color);
       animation: flicker 2.5s infinite ease-in-out;
       position: relative;
@@ -96,79 +93,77 @@
     }
 
     .bottom-section {
-      position: absolute; bottom: 2rem; width: 100%; text-align: center;
+      position: absolute;
+      bottom: 2rem;
+      width: 100%;
+      text-align: center;
     }
     .bottom-section .message {
-      font-size: 1.2rem; margin-bottom: 1rem;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
       color: var(--accent-color);
     }
-    .social-links { display: flex; justify-content: center; gap: 1.5rem; }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
     .social-links a {
       color: var(--accent-color);
-      font-size: 1.5rem; text-decoration: none;
+      font-size: 1.5rem;
+      text-decoration: none;
       transition: transform 0.2s;
     }
+
     .social-links a:hover { transform: scale(1.2); }
-    
+
+    /* Media Queries for Responsiveness */
     @media (max-width: 768px) {
-  .logo {
-    font-size: 2rem;
-    top: 1rem;
-  }
+      .logo {
+        font-size: 2rem;
+        top: 1rem;
+      }
+      .construction {
+        font-size: 2rem;
+        margin-top: 20vh;
+      }
+      .bottom-section .message {
+        font-size: 1rem;
+      }
+      .social-links a {
+        font-size: 1.2rem;
+      }
+    }
 
-  .construction {
-    font-size: 2rem;
-    margin-top: 20vh;
-  }
-
-  .container {
-    margin: 5rem auto 0;
-    padding: 0 1rem;
-  }
-
-  .bottom-section .message {
-    font-size: 1rem;
-  }
-
-  .social-links a {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .logo {
-    font-size: 1.5rem;
-  }
-
-  .construction {
-    font-size: 1.5rem;
-  }
-
-  .bottom-section .message {
-    font-size: 0.9rem;
-  }
-
-  .social-links {
-    gap: 1rem;
-  }
-
-  .social-links a {
-    font-size: 1rem;
-  }
-}
-
+    @media (max-width: 480px) {
+      .logo {
+        font-size: 1.5rem;
+      }
+      .construction {
+        font-size: 1.5rem;
+      }
+      .bottom-section .message {
+        font-size: 0.9rem;
+      }
+      .social-links {
+        gap: 1rem;
+      }
+      .social-links a {
+        font-size: 1rem;
+      }
+    }
   </style>
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <div id="progress-container"><div id="progress-bar"></div></div>
   <canvas id="bg-graph"></canvas>
-    <div class="logo">lazmy.art</div>
-
+  <div class="logo">lazmy.art</div>
   <div class="container">
     <div class="construction">Site Under Construction</div>
   </div>
-
   <div class="bottom-section">
     <p class="message">Thank you for your patience. Our art gallery is getting ready to shine!</p>
     <div class="social-links">
@@ -179,67 +174,121 @@
   </div>
 
   <script>
-    // Progress bar bounce
+    // Progress bar animation
     const bar = document.getElementById('progress-bar');
-    let pct=10, dir=1;
-    setInterval(()=>{ if(pct>=90)dir=-1;else if(pct<=10)dir=1; pct+=dir; bar.style.width=pct+'%'; },100);
+    let pct = 10, dir = 1;
+    setInterval(() => {
+      if (pct >= 90) dir = -1;
+      else if (pct <= 10) dir = 1;
+      pct += dir;
+      bar.style.width = pct + '%';
+    }, 100);
 
-    // Graph animations sequentially
+    // Canvas & graph setup
     const canvas = document.getElementById('bg-graph');
     const ctx = canvas.getContext('2d');
-    function resize(){ canvas.width=innerWidth; canvas.height=innerHeight; }
-    addEventListener('resize', resize); resize();
 
-    const maxPoints=200;
-    let points=[];
-    const graphDuration=8000; // 15s per graph
-    let graphIndex=0;
-    const graphConfigs=[
-      // Graph 1: dynamic hue polyline
+    function resize() {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = innerWidth * dpr;
+      canvas.height = innerHeight * dpr;
+      canvas.style.width = innerWidth + 'px';
+      canvas.style.height = innerHeight + 'px';
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+    }
+
+    function getResponsivePointCount() {
+      const w = window.innerWidth;
+      if (w < 480) return 80;
+      if (w < 768) return 120;
+      return 200;
+    }
+
+    let maxPoints = getResponsivePointCount();
+    let points = [];
+    const graphDuration = 8000;
+    let graphIndex = 0;
+
+    const graphConfigs = [
       {
-        drawOptions:function(){
-          const hue=(Date.now()/50)%360;
-          const col=`hsl(${hue},80%,60%)`;
-          document.documentElement.style.setProperty('--accent-color',col);
-          ctx.strokeStyle=col; ctx.shadowColor=col; ctx.shadowBlur=10;
+        drawOptions: function () {
+          const hue = (Date.now() / 50) % 360;
+          const col = `hsl(${hue},80%,60%)`;
+          document.documentElement.style.setProperty('--accent-color', col);
+          ctx.strokeStyle = col;
+          ctx.shadowColor = col;
+          ctx.shadowBlur = 10;
           ctx.setLineDash([]);
         }
       },
-      // Graph 2: dashed line with static accent
       {
-        drawOptions:function(){
-          const col=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');
-          ctx.strokeStyle=col; ctx.shadowColor=col; ctx.shadowBlur=5;
-          ctx.setLineDash([10,5]);
+        drawOptions: function () {
+          const col = getComputedStyle(document.documentElement).getPropertyValue('--accent-color');
+          ctx.strokeStyle = col;
+          ctx.shadowColor = col;
+          ctx.shadowBlur = 5;
+          ctx.setLineDash([10, 5]);
         }
       }
     ];
 
-    let startTime=performance.now();
-    function drawGrid(){ ctx.strokeStyle='rgba(255,255,255,0.05)'; ctx.lineWidth=1;
-      for(let x=0;x<=canvas.width;x+=50){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,canvas.height);ctx.stroke();}
-      for(let y=0;y<=canvas.height;y+=50){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(canvas.width,y);ctx.stroke();}
+    function drawGrid() {
+      ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x <= canvas.width; x += 50) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+      }
+      for (let y = 0; y <= canvas.height; y += 50) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
     }
 
-    function animate(time){
+    let startTime = performance.now();
+    function animate(time) {
       requestAnimationFrame(animate);
-      if(time-startTime>graphDuration){ graphIndex=(graphIndex+1)%graphConfigs.length; startTime=time; points=[]; }
-      // draw frame
-      ctx.clearRect(0,0,canvas.width,canvas.height);
+      if (time - startTime > graphDuration) {
+        graphIndex = (graphIndex + 1) % graphConfigs.length;
+        startTime = time;
+        points = [];
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       drawGrid();
-      // new point
-      const lastX=points.length?points[points.length-1].x:0;
-      const x=lastX+canvas.width/maxPoints;
-      const y=canvas.height*(1-(Math.random()*0.5+0.25));
-      points.push({x,y}); if(points.length>maxPoints)points.shift();
-      // apply style
+
+      const lastX = points.length ? points[points.length - 1].x : 0;
+      const x = lastX + canvas.width / maxPoints;
+      const y = canvas.height * (1 - (Math.random() * 0.5 + 0.25));
+      points.push({ x, y });
+      if (points.length > maxPoints) points.shift();
+
       graphConfigs[graphIndex].drawOptions();
-      // draw polyline
-      ctx.beginPath(); ctx.lineWidth=2;
-      points.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));
-      ctx.stroke(); ctx.shadowBlur=0;
+
+      ctx.beginPath();
+      ctx.lineWidth = 2;
+      points.forEach((p, i) => i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y));
+      ctx.stroke();
+      ctx.shadowBlur = 0;
     }
-    requestAnimationFrame(animate);
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReducedMotion) {
+      resize();
+      maxPoints = getResponsivePointCount();
+      window.addEventListener('resize', () => {
+        resize();
+        maxPoints = getResponsivePointCount();
+      });
+      requestAnimationFrame(animate);
+    } else {
+      canvas.style.display = 'none';
+    }
   </script>
 </body>
-</html> 
+</html>
