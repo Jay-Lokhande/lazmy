@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>lazmy.art – Under Construction</title>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css" crossorigin="anonymous">
   <style>
@@ -108,20 +107,35 @@
     }
     .social-links a:hover { transform: scale(1.2); }
 
+
+    @media (max-width: 768px) {
+  .social-links a {
+    font-size: 1.2rem;
+    display: inline-block;
+    visibility: visible;
+    opacity: 1;
+  }
+}
+@media (max-width: 480px) {
+  .social-links a {
+    font-size: 1rem;
+    display: inline-block;
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
     @media (max-width: 768px) {
       .logo { font-size: 2rem; top: 1rem; }
       .construction { font-size: 2rem; margin-top: 20vh; }
       .container { margin: 5rem auto 0; padding: 0 1rem; }
       .bottom-section .message { font-size: 1rem; }
-      .social-links a { font-size: 1.2rem; }
     }
 
     @media (max-width: 480px) {
       .logo { font-size: 1.5rem; }
       .construction { font-size: 1.5rem; }
       .bottom-section .message { font-size: 0.9rem; }
-      .social-links { gap: 1rem; }
-      .social-links a { font-size: 1rem; }
     }
 
   </style>
