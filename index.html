@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>lazmy.art – Under Construction</title>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css" crossorigin="anonymous">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-A8nR3GYMn1Ntw1NBa35RLK4zzbxiLK9GMyfQLVM3FA0XSLfkQmNpq//g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
@@ -93,54 +93,67 @@
     }
 
     .bottom-section {
-      position: absolute; bottom: 2rem; width: 100%; text-align: center;
+      position: absolute;
+      bottom: 2rem;
+      width: 100%;
+      text-align: center;
+      z-index: 200; /* Ensure icons are above other elements */
     }
     .bottom-section .message {
-      font-size: 1.2rem; margin-bottom: 1rem;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
       color: var(--accent-color);
     }
-    .social-links { display: flex; justify-content: center; gap: 1.5rem; }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
     .social-links a {
       color: var(--accent-color);
-      font-size: 1.5rem; text-decoration: none;
+      font-size: 1.5rem;
+      text-decoration: none;
       transition: transform 0.2s;
+      display: inline-block;
+      visibility: visible;
+      opacity: 1;
     }
-    .social-links a:hover { transform: scale(1.2); }
+    .social-links a:hover {
+      transform: scale(1.2);
+    }
 
-
-    @media (max-width: 768px) {
-  .social-links a {
-    font-size: 1.2rem;
-    display: inline-block;
-    visibility: visible;
-    opacity: 1;
-  }
-}
-@media (max-width: 480px) {
-  .social-links a {
-    font-size: 1rem;
-    display: inline-block;
-    visibility: visible;
-    opacity: 1;
-  }
-}
+    /* Temporary debugging style */
+    .social-links a i {
+      /* background-color: red; */ /* Uncomment to debug visibility */
+      padding: 5px;
+    }
 
     @media (max-width: 768px) {
       .logo { font-size: 2rem; top: 1rem; }
       .construction { font-size: 2rem; margin-top: 20vh; }
       .container { margin: 5rem auto 0; padding: 0 1rem; }
       .bottom-section .message { font-size: 1rem; }
+      .social-links a {
+        font-size: 1.2rem;
+        display: inline-block;
+        visibility: visible;
+        opacity: 1;
+      }
     }
 
     @media (max-width: 480px) {
       .logo { font-size: 1.5rem; }
       .construction { font-size: 1.5rem; }
       .bottom-section .message { font-size: 0.9rem; }
+      .social-links { gap: 1rem; }
+      .social-links a {
+        font-size: 1rem;
+        display: inline-block;
+        visibility: visible;
+        opacity: 1;
+      }
     }
-
   </style>
-
-<!--  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>-->
 </head>
 <body>
   <div id="progress-container"><div id="progress-bar"></div></div>
@@ -153,12 +166,13 @@
 
   <div class="bottom-section">
     <p class="message">Thank you for your patience. Our art gallery is getting ready to shine!</p>
-<div class="social-links">
-  <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-  <a href="#" aria-label="Behance"><i class="fa-brands fa-behance"></i></a>
-  <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-</div>
+    <div class="social-links">
+      <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#" aria-label="Behance"><i class="fa-brands fa-behance"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+    </div>
   </div>
+
   <script>
     // Progress bar bounce
     const bar = document.getElementById('progress-bar');
