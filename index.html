@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
   <title>lazmy.art – Under Construction</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
@@ -107,6 +109,54 @@
       transition: transform 0.2s;
     }
     .social-links a:hover { transform: scale(1.2); }
+    
+    @media (max-width: 768px) {
+  .logo {
+    font-size: 2rem;
+    top: 1rem;
+  }
+
+  .construction {
+    font-size: 2rem;
+    margin-top: 20vh;
+  }
+
+  .container {
+    margin: 5rem auto 0;
+    padding: 0 1rem;
+  }
+
+  .bottom-section .message {
+    font-size: 1rem;
+  }
+
+  .social-links a {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  .construction {
+    font-size: 1.5rem;
+  }
+
+  .bottom-section .message {
+    font-size: 0.9rem;
+  }
+
+  .social-links {
+    gap: 1rem;
+  }
+
+  .social-links a {
+    font-size: 1rem;
+  }
+}
+
   </style>
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
@@ -192,4 +242,4 @@
     requestAnimationFrame(animate);
   </script>
 </body>
-</html>
+</html> 
