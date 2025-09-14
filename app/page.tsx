@@ -20,6 +20,8 @@ export default function ComingSoonPage() {
   const [showDrawingCanvas, setShowDrawingCanvas] = useState(false)
   const [soundEnabled, setSoundEnabled] = useState(false)
   const [showColorPicker, setShowColorPicker] = useState(false)
+  const [hasAmbientSound, setHasAmbientSound] = useState(false)
+  const [hasInteractionSound, setHasInteractionSound] = useState(false)
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
   // Track mouse position for interactive effects
@@ -34,13 +36,33 @@ export default function ComingSoonPage() {
     }
   }, [])
 
-  // Initialize audio
+  // Initialize audio and detect asset availability
   useEffect(() => {
-    audioRef.current = new Audio("/ambient-sound.mp3")
-    audioRef.current.loop = true
-    audioRef.current.volume = 0.3
+    let isMounted = true
+    const checkAssetsAndSetupAudio = async () => {
+      try {
+        const [ambientResponse, interactionResponse] = await Promise.all([
+          fetch("/ambient-sound.mp3", { method: "HEAD" }),
+          fetch("/interaction-sound.mp3", { method: "HEAD" }),
+        ])
+        if (!isMounted) return
+        const ambientOk = ambientResponse.ok
+        const interactionOk = interactionResponse.ok
+        setHasAmbientSound(ambientOk)
+        setHasInteractionSound(interactionOk)
+        if (ambientOk) {
+          audioRef.current = new Audio("/ambient-sound.mp3")
+          audioRef.current.loop = true
+          audioRef.current.volume = 0.3
+        }
+      } catch {
+        // ignore
+      }
+    }
+    checkAssetsAndSetupAudio()
 
     return () => {
+      isMounted = false
       if (audioRef.current) {
         audioRef.current.pause()
         audioRef.current = null
@@ -52,7 +74,7 @@ export default function ComingSoonPage() {
   useEffect(() => {
     if (audioRef.current) {
       if (soundEnabled) {
-        audioRef.current.play().catch((e) => console.log("Audio play prevented:", e))
+        audioRef.current.play().catch((e: unknown) => console.log("Audio play prevented:", e))
       } else {
         audioRef.current.pause()
       }
@@ -61,18 +83,24 @@ export default function ComingSoonPage() {
 
   // Play sound on interaction
   const playInteractionSound = () => {
-    if (soundEnabled) {
-      const interactionSound = new Audio("/interaction-sound.mp3")
-      interactionSound.volume = 0.2
-      interactionSound.play().catch((e) => console.log("Audio play prevented:", e))
-    }
+    if (!soundEnabled || !hasInteractionSound) return
+    const interactionSound = new Audio("/interaction-sound.mp3")
+    interactionSound.volume = 0.2
+    interactionSound.play().catch((e) => console.log("Audio play prevented:", e))
   }
 
   return (
     <div className="relative min-h-screen bg-black text-white overflow-hidden">
       {/* Grid background */}
       <div className="absolute inset-0 z-0">
-        <div className="h-full w-full bg-[url('/grid.png')] bg-repeat opacity-20"></div>
+        <div
+          className="h-full w-full opacity-20"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
+        ></div>
       </div>
 
       {/* Animated canvas with art elements */}
