@@ -52,7 +52,7 @@ export default function ComingSoonPage() {
   useEffect(() => {
     if (audioRef.current) {
       if (soundEnabled) {
-        audioRef.current.play().catch((e) => console.log("Audio play prevented:", e))
+        audioRef.current.play().catch((e) => console.error("Audio play prevented:", e))
       } else {
         audioRef.current.pause()
       }
@@ -64,7 +64,7 @@ export default function ComingSoonPage() {
     if (soundEnabled) {
       const interactionSound = new Audio("/interaction-sound.mp3")
       interactionSound.volume = 0.2
-      interactionSound.play().catch((e) => console.log("Audio play prevented:", e))
+      interactionSound.play().catch((e) => console.error("Audio play prevented:", e))
     }
   }
 
